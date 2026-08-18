@@ -7989,7 +7989,7 @@ START: Offer CSS
 }
 
 .who-we-inner {
-  padding: 332px 0 70px;
+  padding: 120px 0 70px;
 }
 
 .who-we-content {
@@ -8002,13 +8002,31 @@ START: Offer CSS
   box-shadow: inset 1px 1px 2px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 2px 0 rgba(255, 255, 255, 0.4);
   border-radius: 16px;
 }
+
+.who-we-aboutContent {
+  background-color: var(--cp-color-theme-primary);
+  position: relative;
+  z-index: 2;
+  width: max-content;
+  padding: 30px;
+  backdrop-filter: blur(68px);
+  box-shadow: inset 1px 1px 2px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 2px 0 rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  width: 800px;
+}
 @media only screen and (max-width: 992px) {
   .who-we-content {
+    width: 100%;
+  }
+  .who-we-aboutContent {
     width: 100%;
   }
 }
 @media only screen and (max-width: 992px) {
   .who-we-content {
+    padding: 50px 20px;
+  }
+  .who-we-aboutContent {
     padding: 50px 20px;
   }
 }
