@@ -47,11 +47,12 @@ START: Template Default CSS
   --cp-fs-h6: 14px;
   --cp-color-common-white: #ffffff;
   --cp-color-common-black: #000000;
-  --cp-color-heading-primary: #143A2B;
+  /* --cp-color-heading-primary: #143A2B; */
+   --cp-color-heading-primary:#14191C;
   --cp-color-text-body: #414D4F;
   /* --cp-color-theme-primary: #05EE91; */
   --cp-color-theme-primary:  #007299;
-  --cp-color-bg-1: #F3EDEB;
+  --cp-color-bg-1: #F3EDEB; 
   --cp-color-grey-1: #F3EDEB;
   --cp-color-border-1: #B5CBC5;
 }
@@ -3027,10 +3028,12 @@ START: Header CSS
   }
 }
 .header-2 .top-bar .top-bar-container {
+  padding-left: 30px !important;
   padding: 0 100px 0;
 }
 @media (max-width: 1199px) {
   .header-2 .top-bar .top-bar-container {
+    padding-left: 5px !important;
     padding: 0 20px;
   }
 }
@@ -3120,7 +3123,8 @@ START: Header CSS
   margin: 0 100px;
   padding-right: 16px;
   box-shadow: inset 1px 1px 2px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 2px 0 rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.5);
+  /* background: rgba(255, 255, 255, 0.5); */
+  background: rgb(43, 108, 130);
   backdrop-filter: blur(15px);
 }
 @media (max-width: 1600px) {
@@ -3185,11 +3189,20 @@ START: Header CSS
   gap: 90px;
   margin-left: 0;
 }
+.header-2 .primary-header-inner .header-menu-wrap ul li {
+  margin : 0px 10px !important
+}
 .header-2 .primary-header-inner .header-menu-wrap ul li a {
-  color: var(--cp-color-heading-primary);
+  /* color: var(--cp-color-heading-primary); */
+  color: white;
+}
+.header-2 .primary-header-inner .header-menu-wrap ul li a:hover {
+  /* color: var(--cp-color-heading-primary); */
+  color: black !important;
 }
 .header-2 .primary-header-inner .header-menu-wrap ul .menu-item-has-children:after {
-  color: var(--cp-color-heading-primary);
+  /* color: var(--cp-color-heading-primary); */
+  color: white;
 }
 
 .header-3 {
