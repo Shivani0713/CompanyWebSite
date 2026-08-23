@@ -3190,11 +3190,11 @@ START: Header CSS
   margin-left: 0;
 }
 .header-2 .primary-header-inner .header-menu-wrap ul li {
-  margin : 0px 10px !important
+  margin : 0px 10px !important;
 }
 .header-2 .primary-header-inner .header-menu-wrap ul li a {
   /* color: var(--cp-color-heading-primary); */
-  color: white important;
+  color: white !important;
 }
 .header-2 .primary-header-inner .header-menu-wrap ul li a:hover {
   /* color: var(--cp-color-heading-primary); */
