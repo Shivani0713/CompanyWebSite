@@ -3124,7 +3124,7 @@ START: Header CSS
   padding-right: 16px;
   box-shadow: inset 1px 1px 2px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 2px 0 rgba(255, 255, 255, 0.4);
   /* background: rgba(255, 255, 255, 0.5); */
-  background: rgb(43, 108, 130);
+  background: rgb(43, 108, 130) !important;
   backdrop-filter: blur(15px);
 }
 @media (max-width: 1600px) {
@@ -3194,7 +3194,7 @@ START: Header CSS
 }
 .header-2 .primary-header-inner .header-menu-wrap ul li a {
   /* color: var(--cp-color-heading-primary); */
-  color: white;
+  color: white important;
 }
 .header-2 .primary-header-inner .header-menu-wrap ul li a:hover {
   /* color: var(--cp-color-heading-primary); */
@@ -3202,7 +3202,7 @@ START: Header CSS
 }
 .header-2 .primary-header-inner .header-menu-wrap ul .menu-item-has-children:after {
   /* color: var(--cp-color-heading-primary); */
-  color: white;
+  color: white !important;
 }
 
 .header-3 {
