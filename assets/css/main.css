@@ -2810,8 +2810,9 @@ START: Header CSS
   display: block;
   height: auto;
   line-height: inherit;
-  color: var(--cp-color-heading-primary);
-  font-weight: 500;
+  /* color: var(--cp-color-heading-primary); */
+   color:#2b6c82 !important;
+  font-weight: 700;
   font-size: 16px;
   padding: 10px 0;
   padding-left: 25px;
@@ -4138,7 +4139,8 @@ START: Header CSS
   width: 180px;
   height: 2px;
   position: absolute;
-  bottom: 37px;
+  /* bottom: 37px; */
+  bottom: 150px;
   top: auto;
   background-color: var(--cp-color-common-white);
 }
