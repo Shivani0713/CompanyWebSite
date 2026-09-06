@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aeonsky Power & Systems - Customer Requirement Portal</title>
+  <style>
+    :root {
+      --primary-orange: #e65100;
+      --generac-black: #1a1a1a;
+      --navy-dark: #0f2537;
+      --navy-button: #0a192f;
+      --border-gray: #ccc;
+      --bg-light-orange: #fdf3eb;
+      --bg-light-gray: #f8f9fa;
+      --text-gray: #555;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #333;
+      padding: 30px;
+    }
+
+    /* Container Layout */
+    .quote-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+    }
+
+    /* Left Sidebar */
+    .left-column h1 {
+      font-size: 26px;
+      color: var(--generac-black);
+      margin-bottom: 5px;
+    }
+
+    .left-column h1 span {
+      color: var(--primary-orange);
+    }
+
+    .brand-logo {
+      margin: 15px 0 20px 0;
+    }
+
+    .brand-logo h2 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--generac-black);
+    }
+
+    .brand-logo h2 span {
+      color: var(--primary-orange);
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--generac-black);
+      letter-spacing: 2px;
+    }
+
+    .left-column p {
+      font-size: 13px;
+      color: var(--text-gray);
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .required-text {
+      font-style: italic;
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* Step Navigation Header */
+    .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .step-item {
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      background-color: #e9ecef;
+      color: #495057;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .step-item.active {
+      background-color: var(--navy-dark);
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .step-arrow {
+      color: #888;
+    }
+
+    /* Form Content Sections */
+    .form-step-content {
+      display: none;
+    }
+
+    .form-step-content.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: var(--navy-dark);
+      border-bottom: 2px solid var(--navy-dark);
+      padding-bottom: 5px;
+    }
+
+    .category-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 15px;
+      color: var(--primary-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #444;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    select, input[type="text"], input[type="email"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      font-size: 12px;
+      background-color: #fff;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+    }
+
+    /* Equipment Type Selection Cards */
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      border: 1px solid var(--border-gray);
+      border-radius: 6px;
+      padding: 10px 4px;
+      text-align: center;
+      background-color: #fff;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .card.selected {
+      border: 2px solid var(--primary-orange);
+      background-color: var(--bg-light-orange);
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: bold;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
+    }
+
+    /* Excel Specification Sheets Panels */
+    .excel-spec-panel {
+      display: none;
+      border: 1px solid #d0d7de;
+      padding: 18px;
+      border-radius: 6px;
+      background-color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .excel-spec-panel.active {
+      display: block;
+    }
+
+    .panel-section-header {
+      font-size: 13px;
+      font-weight: bold;
+      background-color: var(--navy-dark);
+      color: white;
+      padding: 6px 12px;
+      margin: 15px 0 10px 0;
+      border-radius: 4px;
+    }
+
+    .panel-section-header:first-child {
+      margin-top: 0;
+    }
+
+    textarea {
+      height: 50px;
+      resize: vertical;
+    }
+
+    /* Footer & Navigation */
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn-quote {
+      background-color: var(--navy-button);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 20px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-nav {
+      background-color: var(--navy-dark);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 15px;
+      border: none;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-draft {
+      background-color: #e2e8f0;
+      color: #333;
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .disclaimer {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.3;
+      margin-top: 15px;
+    }
+
+    .disclaimer a {
+      color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quote-container">
+
+  <div class="left-column">
+    <h1>Customer <span>Requirement Portal</span></h1>
+    <div class="brand-logo">
+      <h2>AEONSKY<span>'</span></h2>
+      <div class="brand-subtitle">POWER AND SYSTEMS</div>
+    </div>
+    <p>Complete this engineering discovery form. Select equipment types below to configure detailed specifications matching our requirement sheets.</p>
+    <p class="required-text">* indicates a required field</p>
+  </div>
+
+  <div class="right-column">
+    
+    <div class="step-header">
+      <div class="step-item active" id="badge-step1" onclick="goToStep(1)">Step 1: Contact & Site Specs</div>
+      <span class="step-arrow">&rarr;</span>
+      <div class="step-item" id="badge-step2" onclick="goToStep(2)">Step 2: System Equipment Requirements</div>
+    </div>
+
+    <form id="customerRequirementForm">
+
+      <div class="form-step-content active" id="step1">
+        <div class="section-title">Step 1: Contact & Site Specifications</div>
+        
+        <div class="category-title">Customer & Discovery Details</div>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Customer / Company *</label>
+            <input type="text" placeholder="Company Name" required>
+          </div>
+          <div class="form-group">
+            <label>Prepared By *</label>
+            <input type="text" placeholder="Sales / Eng Name" required>
+          </div>
+          <div class="form-group">
+            <label>Date *</label>
+            <input type="text" placeholder="YYYY-MM-DD" required>
+          </div>
+          <div class="form-group">
+            <label>Site Location *</label>
+            <input type="text" placeholder="Province / City" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Contact Email *</label>
+            <input type="email" placeholder="email@company.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+
+        <div class="category-title">General Site & Environmental Overview</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Total Connected Load / Capacity</label>
+            <input type="text" placeholder="e.g. kVA / kW / CFM">
+          </div>
+          <div class="form-group">
+            <label>Site Altitude (m above sea level)</label>
+            <input type="text" placeholder="e.g. 1200m (for de-rating)">
+          </div>
+          <div class="form-group">
+            <label>Ambient Temp Range (°C)</label>
+            <input type="text" placeholder="Min/Max °C (e.g. -40°C to +40°C)">
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Primary Installation Type</label>
+            <select>
+              <option>Indoor</option>
+              <option>Outdoor Enclosure</option>
+              <option>Rooftop</option>
+              <option>Containerized</option>
+              <option>Skid-Mounted</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Seismic Zone Rating</label>
+            <input type="text" placeholder="Site seismic category (if applicable)">
+          </div>
+          <div class="form-group">
+            <label>Cold-Weather Package Required?</label>
+            <select>
+              <option>Yes (Block Heater, Battery Warmer)</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <div></div>
+          <button type="button" class="btn-nav" onclick="goToStep(2)">Next: Equipment Specifications &rarr;</button>
+        </div>
+      </div>
+
+      <div class="form-step-content" id="step2">
+        <div class="section-title">Step 2: System Equipment Requirements</div>
+        <div class="category-title">Select Equipment Categories to Fill:</div>
+
+        <div class="product-cards">
+          <div class="card selected" id="card-genset" onclick="toggleProduct('genset')">
+            <div class="card-title">Generator Sets</div>
+          </div>
+          <div class="card" id="card-compressor" onclick="toggleProduct('compressor')">
+            <div class="card-title">Air Compressors</div>
+          </div>
+          <div class="card" id="card-dryer" onclick="toggleProduct('dryer')">
+            <div class="card-title">Air Dryers</div>
+          </div>
+          <div class="card" id="card-bess" onclick="toggleProduct('bess')">
+            <div class="card-title">BESS</div>
+          </div>
+          <div class="card" id="card-microgrid" onclick="toggleProduct('microgrid')">
+            <div class="card-title">Microgrid</div>
+          </div>
+          <div class="card" id="card-retrofit" onclick="toggleProduct('retrofit')">
+            <div class="card-title">Retrofitment</div>
+          </div>
+        </div>
+
+        <div id="options-container">
+
+          <div class="excel-spec-panel active" id="spec-genset">
+            
+            <div class="panel-section-header">A. Application & Load</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Application Type</label>
+                <select>
+                  <option>Standby</option>
+                  <option>Prime</option>
+                  <option>Continuous</option>
+                  <option>Peak Shaving</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Required Rating (kVA / kW @ 0.8 PF)</label>
+                <input type="text" placeholder="e.g. 500 kVA">
+              </div>
+              <div class="form-group">
+                <label>Voltage & Phase</label>
+                <select>
+                  <option>480V / 3-ph</option>
+                  <option>600V / 3-ph</option>
+                  <option>208V / 3-ph</option>
+                  <option>120/240V / 1-ph</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Frequency</label>
+                <input type="text" value="60 Hz (Canada/US standard)">
+              </div>
+              <div class="form-group">
+                <label>Load Type & Largest Motor Start</label>
+                <input type="text" placeholder="Resistive/Inductive; largest motor HP">
+              </div>
+              <div class="form-group">
+                <label>No. of Units & Paralleling</label>
+                <select>
+                  <option>Single unit</option>
+                  <option>Multiple units in parallel</option>
+                  <option>Synchronization</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Fuel & Engine</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Fuel Type</label>
+                <select>
+                  <option>Diesel</option>
+                  <option>Natural Gas</option>
+                  <option>Dual Fuel</option>
+                  <option>Bi-Fuel</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Emission Tier Requirement</label>
+                <select>
+                  <option>EPA Tier 4 Final / CSA</option>
+                  <option>EPA Tier 3</option>
+                  <option>Non-Regulated</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fuel Tank Capacity / Runtime</label>
+                <input type="text" placeholder="Base / Sub-base tank; hours of autonomy">
+              </div>
+            </div>
+
+            <div class="panel-section-header">C. Site & Environmental</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Enclosure Type</label>
+                <select>
+                  <option>Sound-Attenuated</option>
+                  <option>Weatherproof</option>
+                  <option>Open Skid</option>
+                  <option>ISO Container</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Sound Level Requirement</label>
+                <input type="text" placeholder="e.g., 65 dBA @ 7m">
+              </div>
+              <div class="form-group">
+                <label>Installation Type</label>
+                <select>
+                  <option>Outdoor</option>
+                  <option>Indoor</option>
+                  <option>Rooftop</option>
+                  <option>Containerized</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">D. Controls & Integration</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>ATS Requirement</label>
+                <input type="text" placeholder="Yes/No; rating (A), Open/Closed transition">
+              </div>
+              <div class="form-group">
+                <label>Control Panel / SCADA</label>
+                <input type="text" placeholder="Local control panel / Remote monitoring / Telemetry">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Communication Protocol</label>
+                <select>
+                  <option>Modbus</option>
+                  <option>DNP3</option>
+                  <option>BACnet</option>
+                  <option>None</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>BESS/Hybrid Integration</label>
+                <select>
+                  <option>Standalone</option>
+                  <option>Hybrid with BESS or Solar</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">E. Compliance & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Certification Required</label>
+                <input type="text" placeholder="CSA / cUL / UL 2200">
+              </div>
+              <div class="form-group">
+                <label>Warranty Expectation</label>
+                <input type="text" placeholder="Standard / Extended; years or hours">
+              </div>
+              <div class="form-group">
+                <label>Delivery Timeline & Budget</label>
+                <input type="text" placeholder="Required on-site date / Budget">
+              </div>
+            </div>
+          </div>
+
+          <div class="excel-spec-panel" id="spec-compressor">
+            
+            <div class="panel-section-header">A. Application & Capacity</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Application Purpose</label>
+                <select>
+                  <option>Plant Air</option>
+                  <option>Instrument Air</option>
+                  <option>Process Air</option>
+                  <option>Pneumatic Tools</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Compressor Type</label>
+                <select>
+                  <option>Rotary Screw</option>
+                  <option>Reciprocating</option>
+                  <option>Centrifugal</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Air Treatment</label>
+                <select>
+                  <option>Oil-Injected</option>
+                  <option>Oil-Free (Food/Pharma/Instrument Air)</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Required Free Air Delivery (FAD)</label>
+                <input type="text" placeholder="CFM or m3/min">
+              </div>
+              <div class="form-group">
+                <label>Discharge Pressure</label>
+                <input type="text" placeholder="PSI or bar">
+              </div>
+              <div class="form-group">
+                <label>Drive Type</label>
+                <select>
+                  <option>Variable Speed Drive (VSD)</option>
+                  <option>Fixed Speed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Power & Environment</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Power Supply</label>
+                <input type="text" placeholder="Voltage / Phase / Hz">
+              </div>
+              <div class="form-group">
+                <label>Cooling Type</label>
+                <select>
+                  <option>Air-Cooled</option>
+                  <option>Water-Cooled</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Noise Level Requirement</label>
+                <input type="text" placeholder="dBA at 1m">
+              </div>
+            </div>
+
+            <div class="panel-section-header">C. Air Quality & System</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Required Air Quality Class</label>
+                <input type="text" placeholder="ISO 8573-1 class (particulate/water/oil)">
+              </div>
+              <div class="form-group">
+                <label>Redundancy / N+1</label>
+                <select>
+                  <option>No</option>
+                  <option>Yes (Standby unit required)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Integrated Dryer/Filtration Package</label>
+                <select>
+                  <option>Yes</option>
+                  <option>No (Refer to Air Dryer Sheet)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Monitoring / IoT Requirement</label>
+              <input type="text" placeholder="Remote monitoring, predictive maintenance">
+            </div>
+
+            <div class="panel-section-header">D. Compliance & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Certification Required</label>
+                <input type="text" placeholder="CSA / ASME (receiver tanks)">
+              </div>
+              <div class="form-group">
+                <label>Warranty Expectation</label>
+                <input type="text" placeholder="Years / Hours">
+              </div>
+              <div class="form-group">
+                <label>Delivery Timeline & Budget</label>
+                <input type="text" placeholder="Timeline / Target Budget">
+              </div>
+            </div>
+          </div>
+
+          <div class="excel-spec-panel" id="spec-dryer">
+            
+            <div class="panel-section-header">A. Dryer Type & Capacity</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Dryer Type</label>
+                <select>
+                  <option>Refrigerated</option>
+                  <option>Desiccant - Heatless</option>
+                  <option>Desiccant - Heated</option>
+                  <option>Desiccant - Blower Purge</option>
+                  <option>Heat-of-Compression</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Required Flow Capacity (CFM or m3/min)</label>
+                <input type="text" placeholder="Must match/exceed compressor FAD">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Matched Compressor Model/Capacity</label>
+                <input type="text" placeholder="Make, model, FAD of compressor served">
+              </div>
+              <div class="form-group">
+                <label>Required Pressure Dew Point (PDP)</label>
+                <input type="text" placeholder="+3°C (Refrigerated) / -40°C (Desiccant)">
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Process & Environment</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Inlet Air Pressure & Temp</label>
+                <input type="text" placeholder="PSI / bar @ °C / °F">
+              </div>
+              <div class="form-group">
+                <label>Pre-Filtration Required</label>
+                <select>
+                  <option>Particulate</option>
+                  <option>Coalescing</option>
+                  <option>Activated Carbon</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>After-Filtration Required</label>
+              <input type="text" placeholder="Yes/No, specify filter grade">
+            </div>
+
+            <div class="panel-section-header">C. Power, Installation & Controls</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Power Supply</label>
+                <input type="text" placeholder="Voltage / Phase / Hz">
+              </div>
+              <div class="form-group">
+                <label>Installation Type</label>
+                <select>
+                  <option>Indoor</option>
+                  <option>Outdoor</option>
+                  <option>Container</option>
+                  <option>Skid-mounted</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Monitoring Requirement</label>
+                <input type="text" placeholder="Dew point sensor, remote alarm/telemetry">
+              </div>
+            </div>
+
+            <div class="panel-section-header">D. Compliance & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Certification Required</label>
+                <input type="text" placeholder="CSA / UL">
+              </div>
+              <div class="form-group">
+                <label>Warranty Expectation</label>
+                <input type="text" placeholder="Years">
+              </div>
+              <div class="form-group">
+                <label>Delivery Timeline & Budget</label>
+                <input type="text" placeholder="Timeline / Target Budget">
+              </div>
+            </div>
+          </div>
+
+          <div class="excel-spec-panel" id="spec-bess">
+            
+            <div class="panel-section-header">A. Application & Sizing</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Application Purpose</label>
+                <select>
+                  <option>Peak Shaving</option>
+                  <option>Backup Power</option>
+                  <option>Renewable Integration</option>
+                  <option>Demand Response</option>
+                  <option>Microgrid Support</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Required Power Rating (kW)</label>
+                <input type="text" placeholder="e.g. 250 kW">
+              </div>
+              <div class="form-group">
+                <label>Required Energy Capacity (kWh)</label>
+                <input type="text" placeholder="e.g. 500 kWh">
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Discharge Duration</label>
+                <input type="text" placeholder="Hours at rated power">
+              </div>
+              <div class="form-group">
+                <label>Battery Chemistry Preference</label>
+                <select>
+                  <option>LFP (Lithium Iron Phosphate - Preferred)</option>
+                  <option>NMC</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Round-Trip Efficiency Expectation (%)</label>
+                <input type="text" placeholder="Target RTE %">
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Grid Interconnection & Integration</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Interconnection Point</label>
+                <select>
+                  <option>Behind-the-meter</option>
+                  <option>Front-of-meter</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Operating Mode</label>
+                <select>
+                  <option>Grid-tied</option>
+                  <option>Grid-tied with islanding</option>
+                  <option>Fully off-grid</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Integration with Existing Assets</label>
+                <input type="text" placeholder="Existing DG set / Solar PV / Microgrid make/model">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Interconnection Standard</label>
+                <input type="text" placeholder="IEEE 1547, local utility requirements">
+              </div>
+              <div class="form-group">
+                <label>Utility Approval / Permitting Status</label>
+                <select>
+                  <option>Not started</option>
+                  <option>Applied</option>
+                  <option>Approved</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">C. Site & Safety</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Enclosure Type</label>
+                <select>
+                  <option>Containerized</option>
+                  <option>Indoor Rack</option>
+                  <option>Outdoor Cabinet</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fire Safety Standard</label>
+                <input type="text" placeholder="NFPA 855 compliance, fire suppression type">
+              </div>
+              <div class="form-group">
+                <label>Certifications Required</label>
+                <input type="text" placeholder="UL 9540, UL 9540A, CSA C22.2">
+              </div>
+            </div>
+
+            <div class="panel-section-header">D. Controls & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>EMS / SCADA / Remote Monitoring</label>
+                <input type="text" placeholder="Functionality & comm protocols">
+              </div>
+              <div class="form-group">
+                <label>Cycle Life / Warranty Expectation</label>
+                <input type="text" placeholder="Years or total cycles">
+              </div>
+              <div class="form-group">
+                <label>Delivery Timeline & Budget</label>
+                <input type="text" placeholder="Timeline / Target Budget">
+              </div>
+            </div>
+          </div>
+
+          <div class="excel-spec-panel" id="spec-microgrid">
+            
+            <div class="panel-section-header">A. Purpose & Site Profile</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Microgrid Purpose</label>
+                <select>
+                  <option>Resilience / Backup</option>
+                  <option>Cost Savings</option>
+                  <option>Remote Electrification</option>
+                  <option>Renewable Integration</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Site Type</label>
+                <select>
+                  <option>Commercial</option>
+                  <option>Industrial</option>
+                  <option>Remote Community</option>
+                  <option>Campus</option>
+                  <option>Utility</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Critical vs Non-Critical Loads</label>
+                <input type="text" placeholder="kW split & priority loads">
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Generation Mix & Operation</div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Desired Generation Mix & Capacities</label>
+                <input type="text" placeholder="Solar / Wind / DG Set / BESS capacities">
+              </div>
+              <div class="form-group">
+                <label>Renewable Penetration Target (%)</label>
+                <input type="text" placeholder="% of annual load from renewables">
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Grid Connection Status</label>
+                <select>
+                  <option>Grid-tied with islanding capability</option>
+                  <option>Fully off-grid</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Black Start Capability Required?</label>
+                <select>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Redundancy / N+1 Requirement</label>
+                <select>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-section-header">C. Controls, Standards & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Control Architecture</label>
+                <select>
+                  <option>Centralized EMS</option>
+                  <option>Distributed control</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Communication Protocol</label>
+                <select>
+                  <option>Modbus</option>
+                  <option>DNP3</option>
+                  <option>IEC 61850</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Expansion / Scalability Plans</label>
+                <input type="text" placeholder="Future load growth, phased additions">
+              </div>
+            </div>
+          </div>
+
+          <div class="excel-spec-panel" id="spec-retrofit">
+            
+            <div class="panel-section-header">A. Existing Equipment Profile</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Equipment Type</label>
+                <select>
+                  <option>DG Set</option>
+                  <option>Air Compressor</option>
+                  <option>Air Dryer</option>
+                  <option>Control Panel</option>
+                  <option>Switchgear</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Make / Model / Year</label>
+                <input type="text" placeholder="e.g. Caterpillar 2012">
+              </div>
+              <div class="form-group">
+                <label>Current Rating / Capacity</label>
+                <input type="text" placeholder="kVA, CFM, etc.">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Current Condition</label>
+                <select>
+                  <option>Operational</option>
+                  <option>Partially operational</option>
+                  <option>Non-operational</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Existing Control System Details</label>
+                <input type="text" placeholder="Make, model, communication protocol">
+              </div>
+            </div>
+
+            <div class="panel-section-header">B. Retrofit Objective & Scope</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Reason for Retrofit</label>
+                <select>
+                  <option>Emission compliance</option>
+                  <option>Efficiency upgrade</option>
+                  <option>Capacity increase</option>
+                  <option>Failure/breakdown</option>
+                  <option>Controls modernization</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Desired Rating Post-Retrofit</label>
+                <input type="text" placeholder="Target rating">
+              </div>
+              <div class="form-group">
+                <label>Compliance Target</label>
+                <input type="text" placeholder="EPA Tier 4 Final / CSA / local norms">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Scope of Work Detail</label>
+              <input type="text" placeholder="Engine replacement / Controls & SCADA upgrade / Sound attenuation / Enclosure rebuild">
+            </div>
+
+            <div class="panel-section-header">C. Site Constraints & Commercial</div>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Downtime Tolerance / Outage Window</label>
+                <input type="text" placeholder="Max acceptable downtime, preferred hours">
+              </div>
+              <div class="form-group">
+                <label>Site Access Constraints</label>
+                <input type="text" placeholder="Crane access, space limits, transport restrictions">
+              </div>
+              <div class="form-group">
+                <label>Warranty Expectation on Scope</label>
+                <input type="text" placeholder="Target warranty terms">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group" style="margin-top: 15px;">
+          <label for="notes">Special Requirements / Engineering Remarks</label>
+          <textarea id="notes" placeholder="Enter special site constraints or custom technical specs..."></textarea>
+        </div>
+
+        <div class="action-row">
+          <button type="button" class="btn-draft" onclick="goToStep(1)">&larr; Back to Contact & Site Specs</button>
+          <button type="submit" class="btn-quote">Submit Requirement Sheet</button>
+        </div>
+
+        <p class="disclaimer">
+          By submitting this customer requirement sheet, you grant Aeonsky Power & Systems permission to evaluate your technical data in accordance with our <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+  // Step Navigation
+  function goToStep(stepNumber) {
+    document.querySelectorAll('.form-step-content').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.step-item').forEach(i => i.classList.remove('active'));
+
+    document.getElementById('step' + stepNumber).classList.add('active');
+    document.getElementById('badge-step' + stepNumber).classList.add('active');
+  }
+
+  // Toggle Equipment Spec Panels
+  function toggleProduct(productId) {
+    const card = document.getElementById('card-' + productId);
+    const specPanel = document.getElementById('spec-' + productId);
+
+    card.classList.toggle('selected');
+
+    if (specPanel) {
+      specPanel.classList.toggle('active');
+    }
+  }
+</script>
+
+</body>
+</html>
