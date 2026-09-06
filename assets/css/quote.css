@@ -224,12 +224,20 @@ textarea:focus {
 /* Excel Specification Sheets Panels */
 .excel-spec-panel {
     display: none;
-    border: 1px solid #007299;
+    /* border: 1px solid #007299; */
     padding: 18px;
     border-radius: 6px;
     /* background-color: #fff; */
     margin-bottom: 20px;
 
+}
+.options-container{
+     border: 1px solid #007299;
+}
+
+.msg_box{
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .excel-spec-panel.active {
@@ -258,7 +266,7 @@ textarea {
 /* Footer & Navigation */
 .action-row {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     margin-top: 20px;
 }
@@ -275,7 +283,7 @@ textarea {
 }
 
 .btn-nav {
-    background-color: #000000;
+    background-color:#007299;
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 15px;
@@ -286,8 +294,8 @@ textarea {
 }
 
 .btn-draft {
-    background-color: #e2e8f0;
-    color: #333;
+    background-color:#007299;
+    color: white;
     padding: 8px 16px;
     border-radius: 12px;
     border: 1px solid #ccc;
