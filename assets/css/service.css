@@ -1,0 +1,48 @@
+/* Card Flip Structure */
+.service-item .service-content-wrapper {
+    perspective: 1000px;
+    width: 100%;
+}
+
+.service-item .service-inner {
+    position: relative;
+    width: 100%;
+    transition: transform 0.6s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+/* Flipped state */
+.service-item.flipped .service-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back Faces */
+.service-face {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.service-face.face-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
+}
+
+/* Smooth Arrow Animation */
+.arrow-icon i {
+    transition: transform 0.3s ease;
+}
+.flipped .arrow-icon i {
+    transform: rotate(180deg);
+}
+
+.service_desc{
+    color: white;
+    padding-left: 20px ;
+}
+
+.service_arrow{
+    margin-right: 40px;
+}
